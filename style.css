@@ -10,17 +10,13 @@ body{
 
 nav{
     font-size: 14px;
-    z-index: 999;
-    top: 0;
     display: flex;
-    position: fixed;
     width: 100%;
-    padding: 0 0;
-    background-color: #EADBC8;
 }
 
 nav img{
     height: 54px;
+    cursor: pointer;
 }
 
 nav ul{
@@ -47,7 +43,6 @@ li a{
 header{
     position: relative;
     display: flex;
-    margin-top: 50px;
     background-color: #395144;
     color: #EADBC8;
     width: 100%;
@@ -73,8 +68,9 @@ header{
     font-size: 15px;
     margin-top: 12px;
     border: 0px;
-    border-radius: 5px;
-    padding: 9px 24px;
+    width: 100px;
+    height: 40px;
+    border-radius:4px;
     background-color: #1E3827;
     cursor: pointer;
     transition: 0.2s;
@@ -101,4 +97,124 @@ header{
 
 .header-right img {
     width: 340px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 50px;
+}
+
+main h2{
+    margin-bottom: 30px;
+    font-size: 34px;
+    color: #1E3827;
+}
+
+.search-form{
+    position: relative;
+    margin-bottom: 40px;
+    /* background-color: aqua; */
+}
+
+.search-form img{
+    top: 7px;
+    left: 6px;
+    width: 28px;
+    position: absolute;
+}
+
+.search-form input{
+    outline: none;
+    font-size: 19px;
+    border: 0.5px solid #395144;
+    width: 400px;
+    height: 40px;
+    border-radius: 4px;
+    padding-left: 40px;
+}
+
+.search-form button{
+    position: relative;
+    bottom: 2px;
+    background-color: #395144;
+    color: #EADBC8;
+    border: 0px;
+    width: 100px;
+    height: 40px;
+    border-radius:4px;
+    transition: 0.2s;
+}
+
+.search-form button:hover{
+    background-color: #9DBC98;
+    color: #1E3827;
+    cursor: pointer;
+}
+
+.container{
+    /* background-color: aqua; */
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.box{
+    text-align: center;
+    background-color: #FBF4E6;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 0 50px;
+}
+
+.frame{
+    background-color: #ffffff;
+    padding: 5px;
+    border: 1px solid #395144 ;
+    border-radius: 4px;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 8px;
+}
+
+.frame img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.title{
+    color: #1E3827;
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.status{
+    color: #1E3827;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.selengkapnya{
+    font-size: 14px;
+    background-color: #395144;
+    border: 0px;
+    width: 120px;
+    height: 44px;
+    border-radius:4px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.selengkapnya:hover{
+    background-color: #9DBC98;
+}
+
+.selengkapnya a{
+    color: #ffffff;
+    text-decoration: none;
 }
