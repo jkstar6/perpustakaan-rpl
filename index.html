@@ -10,12 +10,14 @@
 </head>
 
 <body>
-    <nav>
-        <img src="img/logo-nav.png" alt="">
+    <nav class="nav-main">
+        <a href="index.php">
+            <img src="img/logo-nav.png" alt="">
+        </a>
         <ul>
-            <li><a class="home" href="#">Home</a></li>
-            <li><a href="#">Buku</a></li>
-            <li><a href="#">Petugas</a></li>
+            <li class="li-main"><a class="home" href="index.php">Home</a></li>
+            <li class="li-main"><a href="daftar_buku.php">Buku</a></li>
+            <li class="li-main"><a href="dashboard.php">Petugas</a></li>
         </ul>
     </nav>
 
@@ -23,7 +25,9 @@
         <div class="header-left">
             <h1>Perpustakaan<br>Kampoeng Galia</h1>
             <p>your text here</p>
-            <button><a class="a-header" href="">jelajahi</a></button>
+            <button onclick="window.location.href='daftar_buku.php'">
+                jelajahi
+            </button>
         </div>
         <div class="header-right">
             <img src="img/header-image.png" alt="">
@@ -33,13 +37,13 @@
 
     <main>
         <h2>Pencarian Buku</h2>
-        <div class="search-form">
+        <div class="search">
             <img src="img/search.png" alt="">
             <input type="text">
             <button>SEARCH</button>
         </div>
 
-        <div class="container">
+        <div class="container-main">
             <div class="box">
                 <div class="frame">
                     <img src="img/buku.jpg" alt="">
@@ -77,7 +81,9 @@
             </div>
         </div>
         
-        <button class="selengkapnya"><a href="">Selengkapnya</a></button>
+        <button onclick="window.location.href='daftar_buku.php'" class="selengkapnya">
+            Selengkapnya
+        </button>
     </main>
 
 </body>
