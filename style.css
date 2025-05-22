@@ -294,7 +294,7 @@ main h2{
     justify-content: center;
 }
 
-/* ====================Detal Buku================== */
+/* ====================Detail Buku================== */
 
 .back-button{
     background-color: #FBF4E6;
@@ -367,7 +367,7 @@ main h2{
 }
 
 
-/* ====================SIDE-NAVBAR -- Dashboard================== */
+/* ====================SIDE-NAVBAR -- LOGIN================== */
 
 
 .btn2-1, .btn2-2, .btn2-3{
@@ -407,12 +407,12 @@ main h2{
     flex-direction: column;
 }
 
-.container-buku form label{
+.form-login label, .dashboard-text label{
     margin-bottom: 10px;
     font-size: 17px;
 }
 
-.container-buku form input{
+.form-login input{
     margin-bottom: 20px;
     border: 1px solid #395144;
     border-radius: 5px;
@@ -422,7 +422,7 @@ main h2{
     font-size: 16px;
 }
 
-.container-buku form button{
+.form-login button{
     margin-top: 10px;
     position: relative;
     left: 250px;
@@ -433,4 +433,61 @@ main h2{
     background-color: #1E3827;
     color: #EADBC8;
     font-size: 16px;
+}
+
+/* ====================DASHBOARD================== */
+
+.form-dashboard{
+    position: relative;
+    width: 600px;
+}
+
+.dashboard-text{
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-text input{
+    margin-bottom: 20px;
+    border: 1px solid #395144;
+    border-radius: 5px;
+    width: 400px;
+    height: 40px;
+    padding: 0px 10px;
+    font-size: 16px;
+    cursor: not-allowed;
+}
+
+.dashboard-ubah button{
+    margin-top: 10px;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    width: 100px;
+    height: 40px;
+    border: 0px;
+    border-radius: 5px;
+    background-color: #1E3827;
+    color: #EADBC8;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.line{
+    width: 700px;
+    height: 1.5px;
+    background-color: #1E3827;
+    margin: 20px 0 40px 0;
+}
+
+.dash-button button{
+    margin: 0 12px;
+    font-size: 15px;
+    width: 130px;
+    height: 45px;
+    border: 0px;
+    border-radius: 5px;
+    background-color: #1E3827;
+    color: #EADBC8;
+    cursor: pointer;
 }
