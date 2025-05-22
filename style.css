@@ -370,7 +370,7 @@ main h2{
 /* ====================SIDE-NAVBAR -- Dashboard================== */
 
 
-/* .btn2-1, .btn2-2, .btn2-3{
+.btn2-1, .btn2-2, .btn2-3{
     display: flex;
     align-items: center;
     font-size: 15px;
@@ -386,11 +386,11 @@ main h2{
     transition: 0.2s;
 }
 
-.btn2-1:hover, .btn2-3:hover{
+.btn2-1:hover, .btn2-2:hover{
     background-color: #1E3827;
 }
 
-.btn2-2{
+.btn2-3{
     background-color: #FBF4E6;
     color: #1E3827;
 }
@@ -399,4 +399,38 @@ main h2{
     width: 18px;
     height: 18px;
     margin-right: 5px;
-} */
+}
+
+.container-buku form{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-buku form label{
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.container-buku form input{
+    margin-bottom: 20px;
+    border: 1px solid #395144;
+    border-radius: 5px;
+    width: 600px;
+    height: 40px;
+    padding: 0px 10px;
+    font-size: 16px;
+}
+
+.container-buku form button{
+    margin-top: 10px;
+    position: relative;
+    left: 250px;
+    width: 100px;
+    height: 40px;
+    border: 0px;
+    border-radius: 5px;
+    background-color: #1E3827;
+    color: #EADBC8;
+    font-size: 16px;
+}
