@@ -346,7 +346,7 @@ main h2{
     margin: 0 120px;
 }
 
-.deskripsi{
+.deskripsi-detail{
     margin: 55px 0 0 60px;
     color: #1E3827;
 }
@@ -362,7 +362,7 @@ main h2{
     cursor: not-allowed;
 }
 
-.deskripsi p{
+.deskripsi-detail p{
     display: block;
 }
 
@@ -435,6 +435,53 @@ main h2{
     font-size: 16px;
 }
 
+/* ====================TAMBAH BUKU================== */
+
+#judul, #deskripsi, #status{
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #1E3827;
+    padding: 6px 10px;
+}
+
+#status{
+    padding: 0px;
+}
+
+#deskripsi{
+    height: 70px;
+}
+
+.input-buku{
+    position: relative;
+}
+
+.input-buku label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.custom-file-input {
+    border: 1px dashed #1E3827;
+    padding: 10px;
+    background-color: #f8f9fa;
+    color: #9DBC98;
+}
+
+.input-buku button{
+    background-color: #395144;
+    color: #ffffff;
+    font-size: 15px;
+    border: 0px;
+    border-radius: 5px;
+    height: 38px;
+    width: 100px;
+    position: relative;
+    top: 20px;
+    left: 300px;
+}
+
 /* ====================DASHBOARD================== */
 
 .form-dashboard{
@@ -455,7 +502,6 @@ main h2{
     height: 40px;
     padding: 0px 10px;
     font-size: 16px;
-    cursor: not-allowed;
 }
 
 .dashboard-ubah button{
