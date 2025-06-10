@@ -1,3 +1,29 @@
+<?php
+    include 'koneksi.php';
+
+    // Validasi ID_buku
+    if (!isset($_GET['ID_buku']) || empty($_GET['ID_buku']) || !is_numeric($_GET['ID_buku'])) {
+        header("Location: daftar_buku.php?error=invalid_id");
+        exit();
+    }
+
+    $ID_buku = (int)$_GET['ID_buku']; // Konversi ke integer untuk keamanan
+
+    // Query dengan prepared statement
+    $query = "SELECT * FROM buku WHERE ID_buku = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $ID_buku);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) == 0) {
+        header("Location: daftar_buku.php?error=book_not_found");
+        exit();
+    }
+
+    $buku = mysqli_fetch_assoc($result);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,14 +65,16 @@
             <img src="img/back.png" alt="">
         </button>
         <div class="container-detail">
-            <h2>Judul Buku</h2>
+            
+            <h2><?php echo htmlspecialchars($buku['judul']); ?></h2>
             <div class="frame-detail">
-                <img src="img/buku.jpg" alt="">
+                <img src="data/<?php echo htmlspecialchars($buku['gambar']); ?>" alt="">
             </div>
             <div class="deskripsi-detail">
-                <button class="status-button">STATUS</button>
-                <p>Deskripsi buku ada disini</p>
+                <button class="status-button"><?php echo htmlspecialchars($buku['status']); ?></button>
+                <p><?php echo htmlspecialchars($buku['deskripsi']); ?></p>
             </div>
+            
         </div>
     </div>
 </body>

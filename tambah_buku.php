@@ -95,15 +95,15 @@ if (isset($_POST['aksiBuku'])) { //tambah lab
             <label for="">Judul</label>
             <input required type="text" id="judul" name="judul">
             <label for="">Deskripsi</label>
-            <textarea name="" id="deskripsi" name="deskripsi"></textarea>
+            <textarea id="deskripsi" name="deskripsi"></textarea>
 
             <label for="">Gambar</label>
             <input class="file-input" type="file" id="gambar" name="gambar" accept="image/*">
 
             <label for="">Status</label>
             <select id="status" name="status">
-                <option value="tersedia">Tersedia</option>
-                <option value="kosong">Kosong</option>
+                <option value="TERSEDIA">Tersedia</option>
+                <option value="KOSONG">Kosong</option>
             </select>
             <button class="btnBuku" type="submit" name="aksiBuku" value="add">INPUT</button>
         </form>

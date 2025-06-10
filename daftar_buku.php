@@ -1,3 +1,10 @@
+<?php
+    include 'koneksi.php';
+
+    $query = "SELECT * FROM buku";
+    $sql = mysqli_query($conn, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +49,20 @@
         </div>
 
         <div class="container-list">
+            <?php
+              while($result = mysqli_fetch_assoc($sql)) {
+            ?>
             <div class="box">
+                <div class="frame" onclick="window.location.href='detail_buku.php?ID_buku=<?php echo $result['ID_buku'] ?>'">
+                    <img src="data/<?php echo $result['gambar']; ?>" alt="">
+                </div>
+                <p class="title"><?php echo $result['judul']; ?></p>
+                <p class="status"><?php echo $result['status']; ?></p>
+            </div>
+            <?php
+              }
+            ?>
+            <!-- <div class="box">
                 <div class="frame">
                     <img src="img/buku.jpg" alt="">
                 </div>
@@ -132,14 +152,7 @@
                 </div>
                 <p class="title">Book Title</p>
                 <p class="status">STATUS</p>
-            </div>
-            <div class="box">
-                <div class="frame">
-                    <img src="img/buku.jpg" alt="">
-                </div>
-                <p class="title">Book Title</p>
-                <p class="status">STATUS</p>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>
