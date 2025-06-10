@@ -50,10 +50,10 @@
         </form>
         <div class="line"></div>
         <div class="dash-button">
-            <button>Tambah Buku</button>
-            <button>Data Buku</button>
-            <button>Aktivitas</button>
-            <button>Tambah Petugas</button>
+            <button onclick="window.location.href='tambah_buku.php'">Tambah Buku</button>
+            <button onclick="window.location.href='daftar_buku.php'">Data Buku</button>
+            <button onclick="window.location.href='aktivitas.php'">Aktivitas</button>
+            <button onclick="window.location.href='tammbah_petugas.php'">Tambah Petugas</button>
         </div>
     </div>
 </body>

@@ -439,7 +439,7 @@ main h2{
 
 #judul, #deskripsi, #status{
     width: 400px;
-    height: 40px;
+    height: 35px;
     border-radius: 5px;
     border: 1px solid #1E3827;
     padding: 6px 10px;
@@ -447,6 +447,7 @@ main h2{
 
 #status{
     padding: 0px;
+    /* width: 422px; */
 }
 
 #deskripsi{
@@ -462,8 +463,9 @@ main h2{
     margin-bottom: 10px;
 }
 
-.custom-file-input {
+.file-input {
     border: 1px dashed #1E3827;
+    border-radius: 5px;
     padding: 10px;
     background-color: #f8f9fa;
     color: #9DBC98;
