@@ -1,3 +1,13 @@
+<?php
+    include 'koneksi.php';
+    session_start();
+    if (empty($_SESSION['username']) || $_SESSION['status'] !== 'login') {
+        $_SESSION['eksekusi'] = "<p class='alert' style='color: #f20202;'>Silahkan login terlebih dahulu!</p>";
+        header("location: login.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +61,7 @@
         <div class="line"></div>
         <div class="dash-button">
             <button onclick="window.location.href='tambah_buku.php'">Tambah Buku</button>
-            <button onclick="window.location.href='daftar_buku.php'">Data Buku</button>
+            <button onclick="window.location.href='buku-edit.php'">Data Buku</button>
             <button onclick="window.location.href='aktivitas.php'">Aktivitas</button>
             <button onclick="window.location.href='tammbah_petugas.php'">Tambah Petugas</button>
         </div>

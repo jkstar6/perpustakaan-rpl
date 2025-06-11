@@ -164,6 +164,7 @@ main h2{
 }
 
 .box{
+    position: relative;
     text-align: center;
     background-color: #FBF4E6;
     padding: 10px;
@@ -179,6 +180,7 @@ main h2{
     width: 120px;
     height: 120px;
     margin-bottom: 8px;
+    cursor: pointer;
 }
 
 .frame img{
@@ -433,6 +435,7 @@ main h2{
     background-color: #1E3827;
     color: #EADBC8;
     font-size: 16px;
+    cursor: pointer;
 }
 
 /* ====================TAMBAH BUKU================== */
@@ -538,4 +541,22 @@ main h2{
     background-color: #1E3827;
     color: #EADBC8;
     cursor: pointer;
+}
+
+/* ========= buku-edit ========== */
+.buku-edit-h1{
+    margin-bottom: 40px;
+}
+
+.btnDelete{
+    background: transparent;
+    border: 0px;
+    position: absolute;
+    right: -12px;
+    top: -12px;
+    cursor: pointer;
+}
+
+.btnDelete img{
+    height: 28px;
 }

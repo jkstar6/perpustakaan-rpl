@@ -35,12 +35,20 @@
     </nav>
     <div class="container-buku">
         <h1>KHUSUS PETUGAS</h1>
-        <form action="" class="form-login">
-            <label for="formUsername">Username</label>
-            <input type="text" name="" id="formUsername">
-            <label for="formPassword">Password</label>
-            <input type="password" name="" id="formPassword">
-            <button>login</button>
+        <?php
+            //aktifkan session untuk alert
+            session_start();
+            if (isset($_SESSION['eksekusi'])) {
+                echo $_SESSION['eksekusi'];
+                unset($_SESSION['eksekusi']);
+            }
+        ?>
+        <form action="auth.php" method="POST" class="form-login">
+            <label for="username">Username</label>
+            <input required type="text" name="username" id="username">
+            <label for="password">Password</label>
+            <input required type="password" name="password" id="password">
+            <button type="submit" value="login">login</button>
         </form>
     </div>
 </body>
