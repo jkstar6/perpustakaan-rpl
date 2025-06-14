@@ -70,7 +70,7 @@
                         <img src="img/delete.png" alt="">
                     </button>
                 </a>
-                <div class="frame" onclick="window.location.href='detail_buku.php?ID_buku=<?php echo $result['ID_buku'] ?>'">
+                <div class="frame" onclick="window.location.href='detail_edit.php?ID_buku=<?php echo $result['ID_buku'] ?>'">
                     <img src="data/<?php echo $result['gambar']; ?>" alt="">
                 </div>
                 <p class="title"><?php echo $result['judul']; ?></p>

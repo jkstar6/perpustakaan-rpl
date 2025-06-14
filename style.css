@@ -560,3 +560,15 @@ main h2{
 .btnDelete img{
     height: 28px;
 }
+
+/* ========= detail-edit ========== */
+.status-edit{
+    border: 2px solid #1E3827;
+    border-radius: 5px;
+    width: 100px;
+    height: 34px;
+    color: #1E3827;
+    background-color: #FBF4E6;
+    margin-bottom: 10px;
+    cursor: pointer;
+}

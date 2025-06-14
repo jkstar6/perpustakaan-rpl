@@ -1,11 +1,27 @@
 <?php
     include 'koneksi.php';
-    session_start();
-    if (empty($_SESSION['username']) || $_SESSION['status'] !== 'login') {
-        $_SESSION['eksekusi'] = "<p class='alert' style='color: #f20202;'>Silahkan login terlebih dahulu!</p>";
-        header("location: login.php");
+
+    // Validasi ID_buku
+    if (!isset($_GET['ID_buku']) || empty($_GET['ID_buku']) || !is_numeric($_GET['ID_buku'])) {
+        header("Location: daftar_buku.php?error=invalid_id");
         exit();
     }
+
+    $ID_buku = (int)$_GET['ID_buku']; // Konversi ke integer untuk keamanan
+
+    // Query dengan prepared statement
+    $query = "SELECT * FROM buku WHERE ID_buku = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $ID_buku);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) == 0) {
+        header("Location: daftar_buku.php?error=book_not_found");
+        exit();
+    }
+
+    $buku = mysqli_fetch_assoc($result);
 ?>
 
 <!DOCTYPE html>
@@ -43,27 +59,22 @@
             </li>
         </ul>
     </nav>
+
     <div class="container-buku">
-        <h1>Dashboard</h1>
-        <form action="" class="form-dashboard">
-            <div class="dashboard-text">
-                <label for="">Nama</label>
-                <input type="text">
-                <label for="">Username</label>
-                <input type="text">
-                <label for="">Password</label>
-                <input type="text">
+        <button class="back-button" onclick="window.location.href='buku_edit.php'">
+            <img src="img/back.png" alt="">
+        </button>
+        <div class="container-detail">
+            
+            <h2><?php echo htmlspecialchars($buku['judul']); ?></h2>
+            <div class="frame-detail">
+                <img src="data/<?php echo htmlspecialchars($buku['gambar']); ?>" alt="">
             </div>
-            <div class="dashboard-ubah">
-                <button>UBAH</button>
+            <div class="deskripsi-detail">
+                <button class="status-edit"><?php echo htmlspecialchars($buku['status']); ?></button>
+                <p><?php echo htmlspecialchars($buku['deskripsi']); ?></p>
             </div>
-        </form>
-        <div class="line"></div>
-        <div class="dash-button">
-            <button onclick="window.location.href='tambah_buku.php'">Tambah Buku</button>
-            <button onclick="window.location.href='buku_edit.php'">Data Buku</button>
-            <button onclick="window.location.href='aktivitas.php'">Aktivitas</button>
-            <button onclick="window.location.href='tammbah_petugas.php'">Tambah Petugas</button>
+            
         </div>
     </div>
 </body>
