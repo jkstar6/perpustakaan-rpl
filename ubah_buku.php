@@ -3,7 +3,7 @@
 
     // Validasi ID_buku
     if (!isset($_GET['ID_buku']) || empty($_GET['ID_buku']) || !is_numeric($_GET['ID_buku'])) {
-        header("Location: daftar_buku.php?error=invalid_id");
+        header("Location: detail_edit.php?error=invalid_id");
         exit();
     }
 
@@ -17,7 +17,7 @@
     $result = mysqli_stmt_get_result($stmt);
 
     if (mysqli_num_rows($result) == 0) {
-        header("Location: daftar_buku.php?error=book_not_found");
+        header("Location: detail_edit.php?error=book_not_found");
         exit();
     }
 
@@ -26,6 +26,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +34,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Perpustakaan</title>
 </head>
+
 <body>
     <nav class="nav-side">
         <i>
@@ -40,20 +42,20 @@
         </i>
         <ul>
             <li>
-                <button class="btn-1" onclick="window.location.href='index.php'">
+                <button class="btn2-1" onclick="window.location.href='index.php'">
                     <img src="img/home.png" alt="">
                     Home
                 </button>
             </li>
             <li>
-                <button class="btn-2" onclick="window.location.href='daftar_buku.php'">
-                    <img src="img/books-dark.png" alt="">
+                <button class="btn2-2" onclick="window.location.href='daftar_buku.php'">
+                    <img src="img/books-light.png" alt="">
                     Buku
                 </button>
             </li>
             <li>
-                <button class="btn-3" onclick="window.location.href='dashboard.php'">
-                    <img src="img/user-light.png" alt="">
+                <button class="btn2-3" onclick="window.location.href='dashboard.php'">
+                    <img src="img/user-dark.png" alt="">
                     Petugas
                 </button>
             </li>
@@ -64,18 +66,22 @@
         <button class="back-button" onclick="window.history.back()">
             <img src="img/back.png" alt="">
         </button>
-        <div class="container-detail">
-            
-            <h2><?php echo htmlspecialchars($buku['judul']); ?></h2>
-            <div class="frame-detail">
-                <img src="data/<?php echo htmlspecialchars($buku['gambar']); ?>" alt="">
-            </div>
-            <div class="deskripsi-detail">
-                <button class="status-button"><?php echo htmlspecialchars($buku['status']); ?></button>
-                <p><?php echo htmlspecialchars($buku['deskripsi']); ?></p>
-            </div>
-            
-        </div>
+
+        <h1>Masukkan Data Buku</h1>
+        <form action="" method="POST" enctype="multipart/form-data" class="input-buku">
+            <label for="">Judul</label>
+            <input required type="text" id="judul" name="judul" value="<?php echo htmlspecialchars($buku['judul']); ?>">
+            <label for="">Deskripsi</label>
+            <textarea id="deskripsi" name="deskripsi"><?php echo htmlspecialchars($buku['deskripsi']); ?></textarea>
+
+            <label for="">Status</label>
+            <select id="status" name="status" value="<?php echo htmlspecialchars($buku['status']); ?>">
+                <option value="TERSEDIA">Tersedia</option>
+                <option value="KOSONG">Kosong</option>
+            </select>
+            <button class="btnBuku" type="submit" name="aksiBuku" value="ubah">INPUT</button>
+        </form>
     </div>
 </body>
+
 </html>

@@ -9,7 +9,7 @@
         $stmt->bind_param("s", $ID_buku);
         $stmt->execute();
         
-        header("Location: buku-edit.php");
+        header("Location: buku_edit.php");
         exit();
     }
 
@@ -65,7 +65,7 @@
               while($result = mysqli_fetch_assoc($sql)) {
             ?>
             <div class="box">
-                <a href="buku-edit.php?delete=<?php echo $result['ID_buku']; ?>" onclick="return confirm('Yakin ingin menghapus buku berjudul: <?php echo addslashes($result['judul']); ?>?');">
+                <a href="buku_edit.php?delete=<?php echo $result['ID_buku']; ?>" onclick="return confirm('Yakin ingin menghapus buku berjudul: <?php echo addslashes($result['judul']); ?>?');">
                     <button class="btnDelete">
                         <img src="img/delete.png" alt="">
                     </button>

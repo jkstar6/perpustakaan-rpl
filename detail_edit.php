@@ -61,7 +61,8 @@
     </nav>
 
     <div class="container-buku">
-        <button class="back-button" onclick="window.location.href='buku_edit.php'">
+
+        <button class="back-button" onclick="window.history.back()">
             <img src="img/back.png" alt="">
         </button>
         <div class="container-detail">
@@ -71,8 +72,15 @@
                 <img src="data/<?php echo htmlspecialchars($buku['gambar']); ?>" alt="">
             </div>
             <div class="deskripsi-detail">
-                <button class="status-edit"><?php echo htmlspecialchars($buku['status']); ?></button>
-                <p><?php echo htmlspecialchars($buku['deskripsi']); ?></p>
+                <button class="status-button">
+                    <?php echo htmlspecialchars($buku['status']); ?>
+                </button>
+                <a class="detail_edit" href="ubah_buku.php?ID_buku=<?php echo urlencode($buku['ID_buku']); ?>">
+                    EDIT🖍
+                </a>
+                <p>
+                    <?php echo htmlspecialchars($buku['deskripsi']); ?>
+                </p>
             </div>
             
         </div>
