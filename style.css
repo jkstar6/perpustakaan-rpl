@@ -365,19 +365,22 @@ main h2{
 }
 
 .deskripsi-detail a{
+    font-size: 14px;
     position: relative;
-    bottom: 10px;
     left: 20px;
     border: 2px solid #1E3827;
     border-radius: 5px;
-    width: 100px;
-    height: 34px;
-    padding: 5px 20px;
+    padding: 6px 20px;
     color: #ffffff;
     background-color: #9DBC98;
     margin-bottom: 10px;
     cursor: pointer;
     text-decoration: none;
+}
+
+.deskripsi-detail a:hover{
+    background-color: #1E3827;
+    border: 2px solid #EADBC8;
 }
 
 .deskripsi-detail p{
@@ -387,6 +390,13 @@ main h2{
 
 /* ====================SIDE-NAVBAR -- LOGIN================== */
 
+.nav-side a{
+    position: absolute;
+    bottom: 40px;
+    left: 35px;
+    text-decoration: none;
+    color: #e9e9e9;
+}
 
 .btn2-1, .btn2-2, .btn2-3{
     display: flex;

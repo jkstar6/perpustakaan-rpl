@@ -41,6 +41,7 @@
                     Petugas
                 </button>
             </li>
+            <a href="logout.php">↩ Logout</a>
         </ul>
     </nav>
     <div class="container-buku">
