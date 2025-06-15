@@ -1,25 +1,44 @@
 <?php
-    session_start();
+session_start();
+include "koneksi.php";
 
-    $conn = new mysqli('localhost', 'root', '', 'perpustakaan_rpl');
+session_start();
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'petugas') {
+    header("Location: konfirmasi_logout.php?lanjut=user");
+    exit();
+}
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['aksiLogin'] === "login") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Gunakan prepared statement
-    $stmt = $conn->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
+    // Ambil user berdasarkan username
+    $stmt = $conn->prepare("SELECT * FROM user WHERE username = ?");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $_SESSION['username'] = $username;
-        $_SESSION['status'] = "login";
-        header("location: dashboard.php");
-        exit();
+    // Cek apakah username ditemukan
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+
+        // Verifikasi password
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['nama'] = $user['nama']; // opsional: untuk ditampilkan
+            $_SESSION['role'] = 'user'; // ✅ Ini penting!
+            header("Location: daftar_buku.php");
+            exit();
+        } else {
+            $_SESSION['eksekusi'] = "<p class='alert' style='color:red;'>Password salah!</p>";
+            header("Location: login_user.php");
+            exit();
+        }
     } else {
-        $_SESSION['eksekusi'] = "<p class='alert' style='background:red; color:white;'>Login gagal!<br>Periksa kembali username atau password!</p>";
-        header("location: login.php");
+        $_SESSION['eksekusi'] = "<p class='alert' style='color:red;'>Username tidak ditemukan!</p>";
+        header("Location: login_user.php");
         exit();
     }
+}
 ?>

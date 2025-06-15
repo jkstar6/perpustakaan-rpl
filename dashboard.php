@@ -1,9 +1,10 @@
 <?php
     include 'koneksi.php';
     session_start();
-    if (empty($_SESSION['username']) || $_SESSION['status'] !== 'login') {
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'petugas') {
+        // Redirect ke halaman login jika tidak sesuai
         $_SESSION['eksekusi'] = "<p class='alert' style='color: #f20202;'>Silahkan login terlebih dahulu!</p>";
-        header("location: login.php");
+        header("Location: login.php");
         exit();
     }
 ?>
@@ -64,7 +65,7 @@
             <button onclick="window.location.href='tambah_buku.php'">Tambah Buku</button>
             <button onclick="window.location.href='buku_edit.php'">Data Buku</button>
             <button onclick="window.location.href='aktivitas.php'">Aktivitas</button>
-            <button onclick="window.location.href='tammbah_petugas.php'">Tambah Petugas</button>
+            <button onclick="window.location.href='tambah_petugas.php'">Tambah Petugas</button>
         </div>
     </div>
 </body>

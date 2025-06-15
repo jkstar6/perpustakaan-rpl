@@ -1,9 +1,17 @@
 <?php
-    session_start(); // mengaktifkan session
-    session_destroy(); // menghapus semua session
-    // mengalihkan halaman sambil mengirim pesan logout
     session_start();
-    //alert
-    $_SESSION['eksekusi'] = "<p class='alert' style='color: #9DBC98;'>Anda telah berhasil log out!</p>";
-    header("location: login.php");
+    session_unset();
+    session_destroy();
+
+    $lanjut = $_GET['lanjut'] ?? '';
+    if ($lanjut === 'user') {
+        header("Location: login_user.php");
+        exit();
+    } elseif ($lanjut === 'petugas') {
+        header("Location: login.php");
+        exit();
+    } else {
+        header("Location: index.php");
+        exit();
+    }
 ?>

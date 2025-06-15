@@ -1,4 +1,15 @@
 <?php
+
+    session_start();
+
+    // Cek apakah login sebagai USER (bukan petugas)
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+        // Redirect ke halaman login jika tidak sesuai
+        $_SESSION['eksekusi'] = "<p class='alert' style='color: #f20202;'>Silahkan login terlebih dahulu!</p>";
+        header("Location: login_user.php");
+        exit();
+    }
+    
     include 'koneksi.php';
 
     // Validasi ID_buku

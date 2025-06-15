@@ -1,3 +1,32 @@
+<?php
+    session_start();
+    include "koneksi.php";
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['aksiLogin'] === "login") {
+        $name = $_POST['name'];
+        $username = $_POST['username'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+        $cekUser = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+        if (mysqli_num_rows($cekUser) > 0) {
+            $_SESSION['eksekusi'] = "<p class='alert' style='color:red;'>Username sudah digunakan!</p>";
+            header("Location: regist.php");
+            exit();
+        }
+
+        $stmt = $conn->prepare("INSERT INTO user (nama, username, password) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $name, $username, $password);
+        
+        if ($stmt->execute()) {
+            $_SESSION['eksekusi'] = "<p class='alert' style='color:rgb(0, 120, 116);'>Silahkan login dengan akun yang baru anda buat!</p>";
+            header("Location: login_user.php");
+            exit();
+        } else {
+            echo "Gagal menyimpan ke database";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,22 +64,22 @@
     </nav>
     
     <div class="container-buku">
-        <h1>LOGIN PENGUNJUNG</h1>
+        <h1>BUAT AKUN BARU</h1>
         <?php
             //aktifkan session untuk alert
-            session_start();
             if (isset($_SESSION['eksekusi'])) {
                 echo $_SESSION['eksekusi'];
                 unset($_SESSION['eksekusi']);
             }
         ?>
-        <form action="auth_user.php" method="POST" class="form-login">
+        <form action="" method="POST" class="form-login">
+            <label for="name">Nama</label>
+            <input required type="text" name="name" id="name">
             <label for="username">Username</label>
             <input required type="text" name="username" id="username">
             <label for="password">Password</label>
             <input required type="password" name="password" id="password">
-            <button type="submit" name="aksiLogin" value="login">login</button>
-            <p>Belum punya akun? <a href="regist.php">SignUp</a></p>
+            <button type="submit" name="aksiLogin" value="login">Buat</button>
         </form>
     </div>
 </body>

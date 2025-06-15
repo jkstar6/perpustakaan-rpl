@@ -1,13 +1,16 @@
 <?php
-    include 'koneksi.php';
 
-    include 'koneksi.php';
     session_start();
-    if (empty($_SESSION['username']) || $_SESSION['status'] !== 'login') {
+
+    // Cek apakah login sebagai USER (bukan petugas)
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+        // Redirect ke halaman login jika tidak sesuai
         $_SESSION['eksekusi'] = "<p class='alert' style='color: #f20202;'>Silahkan login terlebih dahulu!</p>";
-        header("location: login_user.php");
+        header("Location: login_user.php");
         exit();
     }
+
+    include 'koneksi.php';
 
     $query = "SELECT * FROM buku";
     $sql = mysqli_query($conn, $query);
