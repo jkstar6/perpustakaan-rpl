@@ -22,6 +22,28 @@
     }
 
     $buku = mysqli_fetch_assoc($result);
+
+    $gambar = htmlspecialchars($buku['gambar']);
+    if (isset($_POST['aksiBuku'])) { //tambah lab
+        if ($_POST['aksiBuku'] == "ubah") {
+
+            $judul = $_POST['judul'];
+            $deskripsi = $_POST['deskripsi'];
+            $status = $_POST['status'];
+            $query = "UPDATE buku SET judul = ?, deskripsi = ?, status = ?, gambar = ? WHERE ID_buku = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "ssssi", $judul, $deskripsi, $status, $gambar, $ID_buku);
+            $sql = mysqli_stmt_execute($stmt);
+
+            if ($sql) {
+                header("location: detail_edit.php?ID_buku=$ID_buku");
+                exit();
+            } else {
+                echo "Gagal menyimpan ke database";
+            }
+
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -75,11 +97,15 @@
             <textarea id="deskripsi" name="deskripsi"><?php echo htmlspecialchars($buku['deskripsi']); ?></textarea>
 
             <label for="">Status</label>
-            <select id="status" name="status" value="<?php echo htmlspecialchars($buku['status']); ?>">
-                <option value="TERSEDIA">Tersedia</option>
-                <option value="KOSONG">Kosong</option>
+            <select id="status" name="status">
+                <option <?php if(htmlspecialchars($buku['status']) == 'TERSEDIA') {echo "selected"; } ?> value="TERSEDIA">
+                    Tersedia
+                </option>
+                <option <?php if(htmlspecialchars($buku['status']) == 'KOSONG') {echo "selected"; } ?> value="KOSONG">
+                    Kosong
+                </option>
             </select>
-            <button class="btnBuku" type="submit" name="aksiBuku" value="ubah">INPUT</button>
+            <button class="btnBuku" type="submit" name="aksiBuku" value="ubah">UBAH</button>
         </form>
     </div>
 </body>
