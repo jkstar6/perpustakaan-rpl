@@ -83,6 +83,7 @@
             </div>
             <div class="deskripsi-detail">
                 <button class="status-button"><?php echo htmlspecialchars($buku['status']); ?></button>
+                <button class="req-button">PINJAM</button>
                 <p><?php echo htmlspecialchars($buku['deskripsi']); ?></p>
             </div>
             
