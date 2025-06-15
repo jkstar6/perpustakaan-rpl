@@ -1,6 +1,7 @@
 <?php
     include 'koneksi.php';
 
+
     // Validasi ID_buku
     if (!isset($_GET['ID_buku']) || empty($_GET['ID_buku']) || !is_numeric($_GET['ID_buku'])) {
         header("Location: daftar_buku.php?error=invalid_id");

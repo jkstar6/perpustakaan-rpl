@@ -1,6 +1,7 @@
 <?php
     include 'koneksi.php';
 
+
     if (isset($_GET['delete'])) {
         $ID_buku = $_GET['delete'];
 
@@ -55,7 +56,7 @@
     </nav>
 
     <div class="container-buku">
-        <button class="back-button" onclick="window.location.href='dashboard.php'">
+        <button class="back-button" onclick="window.history.back()">
             <img src="img/back.png" alt="">
         </button>
         <h1 class="buku-edit-h1">Manajemen Buku</h1>

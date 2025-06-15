@@ -1,18 +1,3 @@
-<?php
-    include 'koneksi.php';
-
-    include 'koneksi.php';
-    session_start();
-    if (empty($_SESSION['username']) || $_SESSION['status'] !== 'login') {
-        $_SESSION['eksekusi'] = "<p class='alert' style='color: #f20202;'>Silahkan login terlebih dahulu!</p>";
-        header("location: login_user.php");
-        exit();
-    }
-
-    $query = "SELECT * FROM buku";
-    $sql = mysqli_query($conn, $query);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,29 +33,25 @@
             </li>
         </ul>
     </nav>
-
+    
     <div class="container-buku">
-        <div class="search">
-            <img src="img/search.png" alt="">
-            <input type="text">
-            <button>SEARCH</button>
-        </div>
-
-        <div class="container-list">
-            <?php
-              while($result = mysqli_fetch_assoc($sql)) {
-            ?>
-            <div class="box">
-                <div class="frame" onclick="window.location.href='detail_buku.php?ID_buku=<?php echo $result['ID_buku'] ?>'">
-                    <img src="data/<?php echo $result['gambar']; ?>" alt="">
-                </div>
-                <p class="title"><?php echo $result['judul']; ?></p>
-                <p class="status"><?php echo $result['status']; ?></p>
-            </div>
-            <?php
-              }
-            ?>
-        </div>
+        <h1>LOGIN PENGUNJUNG</h1>
+        <?php
+            //aktifkan session untuk alert
+            session_start();
+            if (isset($_SESSION['eksekusi'])) {
+                echo $_SESSION['eksekusi'];
+                unset($_SESSION['eksekusi']);
+            }
+        ?>
+        <form action="auth_user.php" method="POST" class="form-login">
+            <label for="username">Username</label>
+            <input required type="text" name="username" id="username">
+            <label for="password">Password</label>
+            <input required type="password" name="password" id="password">
+            <button type="submit" value="login">login</button>
+            <p>Belum punya akun? <a href="regist.php">SignUp</a></p>
+        </form>
     </div>
 </body>
 </html>

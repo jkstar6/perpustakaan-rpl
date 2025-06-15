@@ -90,6 +90,10 @@ if (isset($_POST['aksiBuku'])) { //tambah lab
     </nav>
 
     <div class="container-buku">
+        <button class="back-button" onclick="window.history.back()">
+            <img src="img/back.png" alt="">
+        </button>
+        
         <h1>Masukkan Data Buku</h1>
         <form action="" method="POST" enctype="multipart/form-data" class="input-buku">
             <label for="">Judul</label>

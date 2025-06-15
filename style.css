@@ -8,7 +8,7 @@ body{
     background-color: #EADBC8;
 }
 
-/* ==============================MAIN-NAVBAR=========================== */
+/* ============MAIN-NAVBAR========== */
 
 .nav-main{
     font-size: 14px;
@@ -42,7 +42,7 @@ body{
     font-weight: bolder;
 }
 
-/* ==================================================================== */
+/* ====================================== */
 
 header{
     position: relative;
@@ -453,7 +453,7 @@ main h2{
 .form-login button{
     margin-top: 10px;
     position: relative;
-    left: 250px;
+    left: 255px;
     width: 100px;
     height: 40px;
     border: 0px;
@@ -462,6 +462,10 @@ main h2{
     color: #EADBC8;
     font-size: 16px;
     cursor: pointer;
+}
+
+.form-login p{
+    text-align: center;
 }
 
 /* ====================TAMBAH BUKU================== */
