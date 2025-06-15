@@ -1,12 +1,15 @@
 <?php
     include 'koneksi.php';
     session_start();
+    
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'petugas') {
         // Redirect ke halaman login jika tidak sesuai
         $_SESSION['eksekusi'] = "<p class='alert' style='color: #f20202;'>Silahkan login terlebih dahulu!</p>";
         header("Location: login.php");
         exit();
     }
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -46,28 +49,11 @@
         </ul>
     </nav>
     <div class="container-buku">
-        <h1>Dashboard</h1>
-        <form action="" class="form-dashboard">
-            <div class="dashboard-text">
-                <label for="">Nama</label>
-                <input type="text">
-                <label for="">Username</label>
-                <input type="text">
-                <label for="">Password</label>
-                <input type="text">
-            </div>
-            <div class="dashboard-ubah">
-                <button>UBAH</button>
-            </div>
-        </form>
-        <div class="line"></div>
-        <div class="dash-button">
-            <button onclick="window.location.href='tambah_buku.php'">Tambah Buku</button>
-            <button onclick="window.location.href='buku_edit.php'">Data Buku</button>
-            <button onclick="window.location.href='peminjaman.php'">Peminjaman</button>
-            <button onclick="window.location.href='aktivitas.php'">Aktivitas</button>
-            <button onclick="window.location.href='tambah_petugas.php'">Tambah Petugas</button>
-        </div>
-    </div>
+        <button class="back-button" onclick="window.history.back()">
+            <img src="img/back.png" alt="">
+        </button>
+
+        <h1>Request Peminjaman</h1>
+        
 </body>
 </html>

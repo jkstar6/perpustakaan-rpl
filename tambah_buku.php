@@ -1,7 +1,9 @@
 <?php
 include 'koneksi.php';
+session_start();
+$username_session = $_SESSION['username'];
 
-if (isset($_POST['aksiBuku'])) { //tambah lab
+if (isset($_POST['aksiBuku'])) {
     if ($_POST['aksiBuku'] == "add") {
 
         $judul = $_POST['judul'];
@@ -27,14 +29,31 @@ if (isset($_POST['aksiBuku'])) { //tambah lab
             if (in_array($ekstensi, $ekstensiValid)) {
                 //memindah dari temporary ke directory
                 if (move_uploaded_file($tmpFile, $dir . $gambar)) {
-                    $query = "INSERT INTO buku VALUES(NULL, NULL, '$judul', '$deskripsi', '$status', '$gambar');";
-                    $sql = mysqli_query($conn, $query);
 
-                    if ($sql) {
-                        header("location: tambah_buku.php");
-                        exit();
+                    // Ambil ID_petugas berdasarkan username
+                    $queryPetugas = "SELECT ID_petugas FROM petugas WHERE username = ?";
+                    $stmtPetugas = mysqli_prepare($conn, $queryPetugas);
+                    mysqli_stmt_bind_param($stmtPetugas, "s", $username_session);
+                    mysqli_stmt_execute($stmtPetugas);
+                    $resultPetugas = mysqli_stmt_get_result($stmtPetugas);
+
+                    if ($rowPetugas = mysqli_fetch_assoc($resultPetugas)) {
+                        $ID_petugas = $rowPetugas['ID_petugas'];
+
+                        // Insert data buku dengan ID_petugas
+                        $query = "INSERT INTO buku VALUES(NULL, ?, ?, ?, ?, ?)";
+                        $stmt = mysqli_prepare($conn, $query);
+                        mysqli_stmt_bind_param($stmt, "issss", $ID_petugas, $judul, $deskripsi, $status, $gambar);
+                        $sql = mysqli_stmt_execute($stmt);
+
+                        if ($sql) {
+                            header("location: tambah_buku.php");
+                            exit();
+                        } else {
+                            echo "Gagal menyimpan ke database.";
+                        }
                     } else {
-                        echo "Gagal menyimpan ke database";
+                        echo "Petugas dengan username ini tidak ditemukan.";
                     }
                 } else {
                     echo "Gagal upload gambar";

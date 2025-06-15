@@ -33,6 +33,34 @@
     }
 
     $buku = mysqli_fetch_assoc($result);
+
+    $username_session = $_SESSION['username'];
+    $query = "SELECT * FROM user WHERE username = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $username_session);
+    mysqli_stmt_execute($stmt);
+    $result_user = mysqli_stmt_get_result($stmt);
+    $user_data = mysqli_fetch_assoc($result_user);
+
+    $tanggal_sekarang = date('Y-m-d');
+
+    if (isset($_POST['aksiReq'])) {
+        $ID_petugas = $buku['ID_petugas'];
+        $ID_buku = $buku['ID_buku'];
+        $ID_user = $user_data['ID_user']; // Fix
+        $tanggal_pinjam = $tanggal_sekarang;
+        $status_peminjaman = "request";
+        
+        $query = "INSERT INTO peminjaman VALUES(NULL, '$ID_petugas', '$ID_buku', '$ID_user', '$tanggal_pinjam', '$status_peminjaman');";
+        $sql = mysqli_query($conn, $query);
+
+        if ($sql) {
+            header("location: daftar_buku.php?status=success");
+            exit();
+        } else {
+            echo "Gagal menyimpan ke database";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +111,9 @@
             </div>
             <div class="deskripsi-detail">
                 <button class="status-button"><?php echo htmlspecialchars($buku['status']); ?></button>
-                <button class="req-button">PINJAM</button>
+                <form method="post">
+                    <button type="submit" name="aksiReq" class="req-button">PINJAM</button>
+                </form>
                 <p><?php echo htmlspecialchars($buku['deskripsi']); ?></p>
             </div>
             
