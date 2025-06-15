@@ -22,9 +22,18 @@
             <img src="img/logo-nav.png" alt="">
         </a>
         <ul>
-            <li class="li-main"><a class="home" href="index.php">Home</a></li>
-            <li class="li-main"><a href="daftar_buku.php">Buku</a></li>
-            <li class="li-main"><a href="dashboard.php">Petugas</a></li>
+            <li class="li-main">
+                <a class="home" href="index.php">Home</a>
+            </li>
+            <li class="li-main">
+                <a href="daftar_buku.php">Buku</a>
+            </li>
+            <li class="li-main">
+                <a href="dashboard.php">Petugas</a>
+            </li>
+            <li class="li-main">
+                <a class="profile" href="profile_user.php"><img src="img/user-dark.png" alt=""></a>
+            </li>
         </ul>
     </nav>
 
@@ -55,7 +64,7 @@
               while($result = mysqli_fetch_assoc($sql)) {
             ?>
             <div class="box">
-                <div class="frame" onclick="window.location.href='detail_buku.php?ID_buku=<?php echo $result['ID_buku'] ?>'">
+                <div class="frame" onclick="window.location.href='detail_buku.php?ID_buku=<?php echo $result['ID_buku']; ?>'">
                     <img src="data/<?php echo $result['gambar']; ?>" alt="">
                 </div>
                 <p class="title"><?php echo $result['judul']; ?></p>
@@ -64,34 +73,6 @@
             <?php
               }
             ?>
-            <!-- <div class="box">
-                <div class="frame">
-                    <img src="img/buku.jpg" alt="">
-                </div>
-                <p class="title">Book Title</p>
-                <p class="status">STATUS</p>
-            </div>
-            <div class="box">
-                <div class="frame">
-                    <img src="img/buku.jpg" alt="">
-                </div>
-                <p class="title">Book Title</p>
-                <p class="status">STATUS</p>
-            </div>
-            <div class="box">
-                <div class="frame">
-                    <img src="img/buku.jpg" alt="">
-                </div>
-                <p class="title">Book Title</p>
-                <p class="status">STATUS</p>
-            </div>
-            <div class="box">
-                <div class="frame">
-                    <img src="img/buku.jpg" alt="">
-                </div>
-                <p class="title">Book Title</p>
-                <p class="status">STATUS</p>
-            </div> -->
         </div>
         
         <button onclick="window.location.href='daftar_buku.php'" class="selengkapnya">
