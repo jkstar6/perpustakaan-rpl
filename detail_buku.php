@@ -45,20 +45,43 @@
     $tanggal_sekarang = date('Y-m-d');
 
     if (isset($_POST['aksiReq'])) {
-        $ID_petugas = $buku['ID_petugas'];
         $ID_buku = $buku['ID_buku'];
         $ID_user = $user_data['ID_user']; // Fix
         $tanggal_pinjam = $tanggal_sekarang;
         $status_peminjaman = "request";
+
+        // 1. Cek apakah status buku TERSEDIA
+        if ($buku['status'] !== 'TERSEDIA') {
+            echo "<script>alert('Buku tidak tersedia untuk dipinjam');window.location.href='daftar_buku.php';</script>";
+            exit();
+        }
         
-        $query = "INSERT INTO peminjaman VALUES(NULL, '$ID_petugas', '$ID_buku', '$ID_user', '$tanggal_pinjam', '$status_peminjaman');";
-        $sql = mysqli_query($conn, $query);
+        // 2. Cek apakah user sudah punya peminjaman aktif untuk buku ini
+        $cek_query = "SELECT * FROM peminjaman 
+                    WHERE ID_buku = ? AND ID_user = ? 
+                    AND status_peminjaman IN ('request', 'dipinjam')";
+        $cek_stmt = mysqli_prepare($conn, $cek_query);
+        mysqli_stmt_bind_param($cek_stmt, "ii", $ID_buku, $ID_user);
+        mysqli_stmt_execute($cek_stmt);
+        $cek_result = mysqli_stmt_get_result($cek_stmt);
+
+        if (mysqli_num_rows($cek_result) > 0) {
+            echo "<script>alert('Anda sudah mengajukan atau sedang meminjam buku ini');window.location.href='daftar_buku.php';</script>";
+            exit();
+        }
+
+        // 3. Lanjutkan INSERT jika lolos semua validasi
+        $query = "INSERT INTO peminjaman (ID_petugas, ID_buku, ID_user, tanggal_pinjam, status_peminjaman)
+                VALUES (NULL, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "iiss", $ID_buku, $ID_user, $tanggal_pinjam, $status_peminjaman);
+        $sql = mysqli_stmt_execute($stmt);
 
         if ($sql) {
-            header("location: daftar_buku.php?status=success");
+            echo "<script>alert('Permintaan peminjaman berhasil dikirim');window.location.href='daftar_buku.php';</script>";
             exit();
         } else {
-            echo "Gagal menyimpan ke database";
+            echo "Gagal menyimpan ke database: " . mysqli_error($conn);
         }
     }
 ?>

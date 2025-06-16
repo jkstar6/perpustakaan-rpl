@@ -9,6 +9,19 @@
         exit();
     }
 
+    $query = "SELECT 
+            peminjaman.ID_peminjaman, 
+            user.nama_lengkap AS nama_user, 
+            buku.judul AS judul_buku, 
+            peminjaman.tanggal_pinjam,
+            peminjaman.status_peminjaman
+        FROM peminjaman
+        JOIN user ON peminjaman.ID_user = user.ID_user
+        JOIN buku ON peminjaman.ID_buku = buku.ID_buku
+        WHERE peminjaman.status_peminjaman = 'request'";
+
+    $sql = mysqli_query($conn, $query);
+
     
 ?>
 
