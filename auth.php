@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ✅ Login berhasil
     if ($result->num_rows > 0) {
         $_SESSION['username'] = $username;
-        $_SESSION['role'] = 'petugas';
+        $_SESSION['role'] = 'petugas'; 
         header("Location: dashboard.php");
         exit();
     } else {

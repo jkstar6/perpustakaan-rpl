@@ -22,14 +22,18 @@
 
     $sql = mysqli_query($conn, $query);
 
-    $username_session = $_SESSION['username'];
-    $query = "SELECT * FROM petugas WHERE username = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "s", $username_session);
-    mysqli_stmt_execute($stmt);
-    $result_petugas = mysqli_stmt_get_result($stmt);
-    $petugas_data = mysqli_fetch_assoc($result_petugas);
-
+    $query_pengembalian = "SELECT 
+                        pengembalian.ID_pengembalian, 
+                        user.nama AS nama_user, 
+                        buku.judul AS judul_buku, 
+                        peminjaman.status_peminjaman AS status_buku,
+                        pengembalian.tanggal_kembali 
+                    FROM pengembalian 
+                    JOIN user ON pengembalian.ID_user = user.ID_user 
+                    JOIN peminjaman ON pengembalian.ID_peminjaman = peminjaman.ID_peminjaman
+                    JOIN buku ON peminjaman.ID_buku = buku.ID_buku";
+    
+    $sql_pengembalian = mysqli_query($conn, $query_pengembalian);
     
 ?>
 
@@ -74,16 +78,16 @@
             <img src="img/back.png" alt="">
         </button>
 
-        <h1>Request Peminjaman</h1>
-        
+        <h1>Aktivitas</h1>
+        <h2>Riwayat Peminjaman</h2>
         <div class="table-container">
             <table border="0" cellpadding="100" cellspacing="10" width="900">
                 <thead>
                     <tr>
                         <th style="font-size: 20px;">No</th>
-                        <th style="font-size: 20px;">Nama User</th>
                         <th style="font-size: 20px;">Judul Buku</th>
-                        <th style="font-size: 20px;">Tanggal Permintaan</th>
+                        <th style="font-size: 20px;">Nama Peminjam</th>
+                        <th style="font-size: 20px;">Tanggal Peminjaman</th>
                         <th style="font-size: 20px;">Status</th>
                     </tr>
                 </thead>
@@ -93,18 +97,50 @@
                     while ($row = mysqli_fetch_assoc($sql)) { ?>
                         <tr>
                             <td style="text-align: center;"><?= $no++; ?></td>
-                            <td style="text-align: center;"><?= htmlspecialchars($row['nama_user']); ?></td>
                             <td style="text-align: center;"><?= htmlspecialchars($row['judul_buku']); ?></td>
+                            <td style="text-align: center;"><?= htmlspecialchars($row['nama_user']); ?></td>
                             <td style="text-align: center;"><?= htmlspecialchars($row['tanggal_pinjam']); ?></td>
-                            <td style="text-align: center; position: relative; bottom: 20px;">
-                                <form method="POST" action="terima_peminjaman.php">
-                                <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
-                                <button type="submit" name="terima">Terima</button>
-                            </form>
+                            <td style="text-align: center; ">
+                                <?= htmlspecialchars($row['status_peminjaman']); ?>
                             </td>
                         </tr>
                     <?php } ?>
                     <?php if (mysqli_num_rows($sql) === 0): ?>
+                        <tr>
+                            <td colspan="5" style="text-align: center;">Tidak ada request peminjaman.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Riwayat Pengembalian</h2>
+        <div class="table-container">
+            <table border="0" cellpadding="100" cellspacing="10" width="900">
+                <thead>
+                    <tr>
+                        <th style="font-size: 20px;">No</th>
+                        <th style="font-size: 20px;">Judul Buku</th>
+                        <th style="font-size: 20px;">Nama Peminjam</th>
+                        <th style="font-size: 20px;">Tanggal Pengembalian</th>
+                        <th style="font-size: 20px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $no = 1;
+                    while ($row = mysqli_fetch_assoc($sql_pengembalian)) { ?>
+                        <tr>
+                            <td style="text-align: center;"><?= $no++; ?></td>
+                            <td style="text-align: center;"><?= htmlspecialchars($row['judul_buku']); ?></td>
+                            <td style="text-align: center;"><?= htmlspecialchars($row['nama_user']); ?></td>
+                            <td style="text-align: center;"><?= htmlspecialchars($row['tanggal_kembali']); ?></td>
+                            <td style="text-align: center; ">
+                                <?= htmlspecialchars($row['status_buku']); ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    <?php if (mysqli_num_rows($sql_pengembalian) === 0): ?>
                         <tr>
                             <td colspan="5" style="text-align: center;">Tidak ada request peminjaman.</td>
                         </tr>
