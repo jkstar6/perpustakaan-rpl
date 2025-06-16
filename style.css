@@ -392,6 +392,7 @@ main h2{
     background-color: #e9e9e9;
     /* margin-bottom: 10px; */
     cursor: not-allowed;
+    margin-bottom: 30px;
 }
 
 .req-button{
@@ -429,8 +430,8 @@ main h2{
 
 .deskripsi-detail p{
     display: block;
-    position: relative;
-    bottom: 20px;
+    position: absolute;
+    top: 50px;
 }
 
 
