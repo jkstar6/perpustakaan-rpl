@@ -79,9 +79,7 @@
                 <a class="detail_edit" href="ubah_buku.php?ID_buku=<?php echo urlencode($buku['ID_buku']); ?>">
                     EDIT🖍
                 </a>
-                <p>
-                    <?php echo htmlspecialchars($buku['deskripsi']); ?>
-                </p>
+                <p><?php echo htmlspecialchars($buku['deskripsi']); ?></p>
             </div>
             
         </div>

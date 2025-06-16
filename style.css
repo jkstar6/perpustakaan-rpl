@@ -638,39 +638,6 @@ main h2{
     height: 28px;
 }
 
-/* ========= detail-edit ========== */
-
-
-.popup{
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.popup-content{
-    height: 170px;
-    width: 700px;
-    background: #18181A;
-    border-radius: 8px;
-    position: relative;
-    bottom: 50px;
-    padding: 0px;
-}
-
-.close{
-    cursor: pointer;
-    background-color: #FFFFFF;
-}
-
-.close:hover{
-    background: #e9e9e9;
-}
 
 /* ========konfirmasi-logout======== */
 .container-konfirmasi{
@@ -700,4 +667,9 @@ main h2{
     border: 1px solid #395144;
     color: #1E3827;
     background-color: #e9e9e9;
+}
+
+/* ========= request peminjaman ========== */
+.table-container{
+    margin-top: 20px;
 }
