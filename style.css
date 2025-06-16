@@ -608,13 +608,13 @@ main h2{
 
 .line{
     width: 700px;
-    height: 1.5px;
+    height: 2px;
     background-color: #1E3827;
-    margin: 20px 0 40px 0;
+    margin: 20px 0 20px 0;
 }
 
 .dash-button button{
-    margin: 0 12px;
+    margin: 20px 12px;
     font-size: 15px;
     width: 130px;
     height: 45px;

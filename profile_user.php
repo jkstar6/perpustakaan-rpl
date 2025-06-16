@@ -48,6 +48,19 @@ $stmt->bind_param("s", $_SESSION['username']);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
+
+$query_pinjam = "SELECT 
+        peminjaman.ID_peminjaman, 
+        user.username AS username,
+        buku.judul AS judul_buku, 
+        peminjaman.tanggal_pinjam,
+        peminjaman.status_peminjaman
+    FROM peminjaman
+    JOIN user ON peminjaman.ID_user = user.ID_user
+    JOIN buku ON peminjaman.ID_buku = buku.ID_buku
+    WHERE user.username = '$username_session' ORDER BY ID_peminjaman ASC";
+
+$sql_pinjam = mysqli_query($conn, $query_pinjam);
 ?>
 
 <!DOCTYPE html>
@@ -89,8 +102,40 @@ $user = $result->fetch_assoc();
 
         <div class="line"></div>
         <div class="dash-button">
-            <button onclick="window.location.href='buku_edit.php'">Peminjaman</button>
             <button onclick="window.location.href='logout.php'">Logout</button>
+        </div>
+
+        <div class="line"></div>
+
+        <h2>History</h2>
+        <div class="table-container">
+            <table border="0" cellspacing="0" width="900">
+                <thead>
+                    <tr>
+                        <th style="font-size: 20px;">No</th>
+                        <th style="font-size: 20px;">Judul Buku</th>
+                        <th style="font-size: 20px;">Tanggal Peminjaman</th>
+                        <th width="100" style="font-size: 20px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $no = 1;
+                    while ($row = mysqli_fetch_assoc($sql_pinjam)) { ?>
+                        <tr>
+                            <td style="text-align: center;"><?= $no++; ?></td>
+                            <td style="text-align: center;"><?= htmlspecialchars($row['judul_buku']); ?></td>
+                            <td style="text-align: center;"><?= htmlspecialchars($row['tanggal_pinjam']); ?></td>
+                            <td style="text-align: center;"><?= htmlspecialchars($row['status_peminjaman']); ?></td>
+                        </tr>
+                    <?php } ?>
+                    <?php if (mysqli_num_rows($sql_pinjam) === 0): ?>
+                        <tr>
+                            <td colspan="5" style="text-align: center;">Tidak ada peminjaman buku.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>

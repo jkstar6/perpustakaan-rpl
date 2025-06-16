@@ -102,9 +102,9 @@
                             <td style="text-align: center;"><?= htmlspecialchars($row['tanggal_pinjam']); ?></td>
                             <td style="text-align: center; position: relative; bottom: 20px;">
                                 <form method="POST" action="terima_peminjaman.php">
-                                <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
-                                <button type="submit" name="terima">Terima</button>
-                            </form>
+                                    <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
+                                    <button type="submit" name="terima">Terima</button>
+                                </form>
                             </td>
                         </tr>
                     <?php } ?>
@@ -140,13 +140,13 @@
                             <td style="text-align: center;"><?= htmlspecialchars($row['tanggal_pinjam']); ?></td>
                             <td style="text-align: center; position: relative; bottom: 20px;">
                                 <form method="POST" action="terima_peminjaman.php">
-                                <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
-                                <button type="submit" name="dikembalikan">Dikembalikan</button>
-                            </form>
+                                    <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
+                                    <button type="submit" name="dikembalikan">Dikembalikan</button>
+                                </form>
                             </td>
                         </tr>
                     <?php } ?>
-                    <?php if (mysqli_num_rows($sql) === 0): ?>
+                    <?php if (mysqli_num_rows($sql_pinjam) === 0): ?>
                         <tr>
                             <td colspan="5" style="text-align: center;">Tidak ada peminjaman buku.</td>
                         </tr>
