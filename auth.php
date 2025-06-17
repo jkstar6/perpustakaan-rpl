@@ -23,10 +23,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['aksiLogin'] === "login") {
         $petugas = $result->fetch_assoc();
 
         // Verifikasi password
-        if (password_verify($password, $petugas['password'])) {
+        if (password_verify($password, $petugas['password']) || $password === $petugas['password']) {
             $_SESSION['username'] = $petugas['username'];
             $_SESSION['nama'] = $petugas['nama']; // opsional: untuk ditampilkan
             $_SESSION['role'] = 'petugas'; // ✅ Ini penting!
+
+            // Jika masih plaintext, upgrade ke hashed password
+        if ($password === $petugas['password']) {
+            $newHash = password_hash($password, PASSWORD_DEFAULT);
+            $stmtUpdate = $conn->prepare("UPDATE petugas SET password = ? WHERE username = ?");
+            $stmtUpdate->bind_param("ss", $newHash, $username);
+            $stmtUpdate->execute();
+        }
+
             header("Location: dashboard.php");
             exit();
         } else {

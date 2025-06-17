@@ -58,6 +58,20 @@
         }
     }
 
+    if (isset($_POST['tolak'])) {
+        $id = $_POST['id_peminjaman'];
+        $query = "DELETE FROM peminjaman WHERE ID_peminjaman = '$id'";
+
+        if (mysqli_query($conn, $query)) {
+            $_SESSION['eksekusi'] = "<p class='alert' style='color: green;'>Peminjaman ditolak dan dihapus.</p>";
+        } else {
+            $_SESSION['eksekusi'] = "<p class='alert' style='color: red;'>Gagal menolak peminjaman.</p>";
+        }
+
+        header("Location: peminjaman.php");
+        exit();
+    }
+
     // Dikembalikan
     if (isset($_POST['dikembalikan'])) {
         $id_peminjaman = $_POST['id_peminjaman'];

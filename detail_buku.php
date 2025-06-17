@@ -70,6 +70,18 @@
             exit();
         }
 
+        $cek_query_2 = "SELECT * FROM peminjaman 
+                    WHERE ID_buku = ? AND status_peminjaman IN ('request', 'dipinjam')";
+        $cek_stmt_2 = mysqli_prepare($conn, $cek_query_2);
+        mysqli_stmt_bind_param($cek_stmt_2, "i", $ID_buku);
+        mysqli_stmt_execute($cek_stmt_2);
+        $cek_result_2 = mysqli_stmt_get_result($cek_stmt_2);
+
+        if (mysqli_num_rows($cek_result_2) > 0) {
+            echo "<script>alert('Sudah ada mengajukan pinjaman untuk buku ini');window.location.href='daftar_buku.php';</script>";
+            exit();
+        }
+
         // 3. Lanjutkan INSERT jika lolos semua validasi
         $query = "INSERT INTO peminjaman (ID_petugas, ID_buku, ID_user, tanggal_pinjam, status_peminjaman)
                 VALUES (NULL, ?, ?, ?, ?)";

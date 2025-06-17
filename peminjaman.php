@@ -76,8 +76,15 @@
         <button class="back-button" onclick="window.history.back()">
             <img src="img/back.png" alt="">
         </button>
-
+        
         <h1>Request Peminjaman</h1>
+
+        <?php
+            if (isset($_SESSION['eksekusi'])) {
+                echo $_SESSION['eksekusi'];
+                unset($_SESSION['eksekusi']);
+            }
+        ?>
         
         <div class="table-container">
             <table border="0" cellspacing="0" width="900">
@@ -103,6 +110,10 @@
                                 <form method="POST" action="terima_peminjaman.php">
                                     <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
                                     <button type="submit" name="terima">Terima</button>
+                                </form>
+                                <form method="POST" action="terima_peminjaman.php" style="display:inline;">
+                                    <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
+                                    <button type="submit" name="tolak" onclick="return confirm('Yakin ingin menolak permintaan ini?')">Tolak</button>
                                 </form>
                             </td>
                         </tr>
