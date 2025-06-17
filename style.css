@@ -129,7 +129,7 @@ main h2{
     margin-bottom: 40px;
     display: flex;
     /* background-color: aqua; */
-    width: 490px;
+    width: 510px;
 }
 
 .search img{
@@ -151,7 +151,7 @@ main h2{
 .search button{
     border: 1px solid #1E3827;
     position: absolute;
-    right: 25px;
+    right: 45px;
     background-color: #395144;
     color: #EADBC8;
     border: 0px;

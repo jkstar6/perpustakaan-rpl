@@ -1,10 +1,6 @@
 <?php
-
     session_start();
-
-    // Cek apakah login sebagai USER (bukan petugas)
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
-        // Redirect ke halaman login jika tidak sesuai
         $_SESSION['eksekusi'] = "<p class='alert' style='color: #f20202;'>Silahkan login terlebih dahulu!</p>";
         header("Location: login_user.php");
         exit();
@@ -62,11 +58,10 @@
 
     <div class="container-buku">
         <form class="search" method="GET" action="daftar_buku.php">
-            
-            <input type="text" name="search" placeholder="Cari judul buku..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+            <input type="text" name="keyword" placeholder="Cari judul buku..." value="<?php echo isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : ''; ?>">
             <button type="submit"><img src="img/search.png" alt=""></button>
 
-            <?php if (isset($_GET['search']) && $_GET['search'] !== ''): ?>
+            <?php if (isset($_GET['keyword']) && $_GET['keyword'] !== ''): ?>
                 <a href="daftar_buku.php" style="margin-left: 10px;">
                     <button class="clear-button" type="button"><img src="img/clear.png" alt=""></button>
                 </a>
