@@ -40,7 +40,7 @@
     <header>
         <div class="header-left">
             <h1>Perpustakaan<br>Kampoeng Galia</h1>
-            <p>your text here</p>
+            <p>Platform informasi dan pengelolaan buku untuk mendukung aktivitas literasi komunitas.</p>
             <button onclick="window.location.href='daftar_buku.php'">
                 jelajahi
             </button>
@@ -53,11 +53,16 @@
 
     <main>
         <h2>Pencarian Buku</h2>
-        <div class="search">
-            <img src="img/search.png" alt="">
-            <input type="text">
-            <button>SEARCH</button>
-        </div>
+        <form class="search" method="GET" action="daftar_buku.php">
+            <input type="text" name="keyword" placeholder="Cari judul buku..." value="<?php echo isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : ''; ?>">
+            <button type="submit"><img src="img/search.png" alt=""></button>
+
+            <?php if (isset($_GET['keyword']) && $_GET['keyword'] !== ''): ?>
+                <a href="daftar_buku.php" style="margin-left: 10px;">
+                    <button class="clear-button" type="button"><img src="img/clear.png" alt=""></button>
+                </a>
+            <?php endif; ?>
+        </form>
 
         <div class="container-main">
             <?php
