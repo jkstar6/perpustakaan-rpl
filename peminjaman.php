@@ -107,11 +107,11 @@
                             <td style="text-align: center;"><?= htmlspecialchars($row['judul_buku']); ?></td>
                             <td style="text-align: center;"><?= htmlspecialchars($row['tanggal_pinjam']); ?></td>
                             <td style="text-align: center; position: relative; bottom: 20px;">
-                                <form method="POST" action="terima_peminjaman.php">
+                                <form class="form-button" method="POST" action="terima_peminjaman.php">
                                     <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
                                     <button type="submit" name="terima">Terima</button>
                                 </form>
-                                <form method="POST" action="terima_peminjaman.php" style="display:inline;">
+                                <form class="form-button" method="POST" action="terima_peminjaman.php" style="display:inline;">
                                     <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
                                     <button type="submit" name="tolak" onclick="return confirm('Yakin ingin menolak permintaan ini?')">Tolak</button>
                                 </form>
@@ -149,7 +149,7 @@
                             <td style="text-align: center;"><?= htmlspecialchars($row['judul_buku']); ?></td>
                             <td style="text-align: center;"><?= htmlspecialchars($row['tanggal_pinjam']); ?></td>
                             <td style="text-align: center; position: relative; bottom: 20px;">
-                                <form method="POST" action="terima_peminjaman.php">
+                                <form class="form-button" method="POST" action="terima_peminjaman.php">
                                     <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
                                     <button type="submit" name="dikembalikan">Dikembalikan</button>
                                 </form>

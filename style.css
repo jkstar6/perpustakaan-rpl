@@ -678,3 +678,13 @@ main h2{
 .table-container{
     margin-top: 20px;
 }
+
+.form-button button{
+    height: 25px;
+    width: 100px;
+    border: 1px solid #395144;
+    border-radius: 5px;
+    color: #1E3827;
+    background-color: #9DBC98;
+    cursor: pointer;
+}
