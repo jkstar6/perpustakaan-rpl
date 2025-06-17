@@ -1,5 +1,4 @@
 <?php
-session_start();
 include "koneksi.php";
 
 session_start();
@@ -9,25 +8,34 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'user') {
 }
 
 
-// Cek jika form dikirim
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['aksiLogin'] === "login") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    // ✅ Gunakan prepared statement
-    $stmt = $conn->prepare("SELECT * FROM petugas WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
+    // Ambil user berdasarkan username
+    $stmt = $conn->prepare("SELECT * FROM petugas WHERE username = ?");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // ✅ Login berhasil
-    if ($result->num_rows > 0) {
-        $_SESSION['username'] = $username;
-        $_SESSION['role'] = 'petugas'; 
-        header("Location: dashboard.php");
-        exit();
+    // Cek apakah username ditemukan
+    if ($result->num_rows === 1) {
+        $petugas = $result->fetch_assoc();
+
+        // Verifikasi password
+        if (password_verify($password, $petugas['password'])) {
+            $_SESSION['username'] = $petugas['username'];
+            $_SESSION['nama'] = $petugas['nama']; // opsional: untuk ditampilkan
+            $_SESSION['role'] = 'petugas'; // ✅ Ini penting!
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            $_SESSION['eksekusi'] = "<p class='alert' style='color:red;'>Password salah!</p>";
+            header("Location: login.php");
+            exit();
+        }
     } else {
-        $_SESSION['eksekusi'] = "<p class='alert' style='background:red; color:white;'>Login gagal!<br>Periksa kembali username atau password!</p>";
+        $_SESSION['eksekusi'] = "<p class='alert' style='color:red;'>Username tidak ditemukan!</p>";
         header("Location: login.php");
         exit();
     }
