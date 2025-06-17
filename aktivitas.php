@@ -18,7 +18,7 @@
         FROM peminjaman
         JOIN user ON peminjaman.ID_user = user.ID_user
         JOIN buku ON peminjaman.ID_buku = buku.ID_buku
-        WHERE peminjaman.status_peminjaman = 'dipinjam'";
+        WHERE peminjaman.status_peminjaman = 'dipinjam' ORDER BY ID_peminjaman DESC";
 
     $sql = mysqli_query($conn, $query);
 
@@ -31,7 +31,7 @@
                     FROM pengembalian 
                     JOIN user ON pengembalian.ID_user = user.ID_user 
                     JOIN peminjaman ON pengembalian.ID_peminjaman = peminjaman.ID_peminjaman
-                    JOIN buku ON peminjaman.ID_buku = buku.ID_buku";
+                    JOIN buku ON peminjaman.ID_buku = buku.ID_buku ORDER BY ID_pengembalian DESC";
     
     $sql_pengembalian = mysqli_query($conn, $query_pengembalian);
     

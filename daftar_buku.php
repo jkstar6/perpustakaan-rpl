@@ -12,8 +12,16 @@
 
     include 'koneksi.php';
 
-    $query = "SELECT * FROM buku";
-    $sql = mysqli_query($conn, $query);
+    if (isset($_GET['keyword']) && !empty(trim($_GET['keyword']))) {
+        $keyword = "%" . mysqli_real_escape_string($conn, $_GET['keyword']) . "%";
+        $stmt = $conn->prepare("SELECT * FROM buku WHERE judul LIKE ?");
+        $stmt->bind_param("s", $keyword);
+        $stmt->execute();
+        $sql = $stmt->get_result();
+    } else {
+        $query = "SELECT * FROM buku";
+        $sql = mysqli_query($conn, $query);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -53,11 +61,17 @@
     </nav>
 
     <div class="container-buku">
-        <div class="search">
-            <img src="img/search.png" alt="">
-            <input type="text">
-            <button>SEARCH</button>
-        </div>
+        <form class="search" method="GET" action="daftar_buku.php">
+            
+            <input type="text" name="search" placeholder="Cari judul buku..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+            <button type="submit"><img src="img/search.png" alt=""></button>
+
+            <?php if (isset($_GET['search']) && $_GET['search'] !== ''): ?>
+                <a href="daftar_buku.php" style="margin-left: 10px;">
+                    <button class="clear-button" type="button"><img src="img/clear.png" alt=""></button>
+                </a>
+            <?php endif; ?>
+        </form>
 
         <div class="container-list">
             <?php

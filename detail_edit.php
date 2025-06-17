@@ -76,9 +76,15 @@
                 <button class="status-button">
                     <?php echo htmlspecialchars($buku['status']); ?>
                 </button>
-                <a class="detail_edit" href="ubah_buku.php?ID_buku=<?php echo urlencode($buku['ID_buku']); ?>">
-                    EDIT🖍
-                </a>
+                <?php if (strtolower($buku['status']) !== 'dipinjam'): ?>
+                    <a class="detail_edit" href="ubah_buku.php?ID_buku=<?= urlencode($buku['ID_buku']); ?>">
+                        EDIT🖍
+                    </a>
+                <?php else: ?>
+                    <a class="detail_edit" style="cursor: not-allowed;">
+                        EDIT🖍
+                    </a>
+                <?php endif; ?>
                 <p><?php echo htmlspecialchars($buku['deskripsi']); ?></p>
             </div>
             

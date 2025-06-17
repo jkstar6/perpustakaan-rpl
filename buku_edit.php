@@ -5,13 +5,29 @@
     if (isset($_GET['delete'])) {
         $ID_buku = $_GET['delete'];
 
-        // Gunakan prepared statement untuk keamanan
-        $stmt = $conn->prepare("DELETE FROM buku WHERE ID_buku = ?");
-        $stmt->bind_param("s", $ID_buku);
-        $stmt->execute();
-        
-        header("Location: buku_edit.php");
-        exit();
+        // Cek status buku dulu
+        $cekStmt = $conn->prepare("SELECT status FROM buku WHERE ID_buku = ?");
+        $cekStmt->bind_param("i", $ID_buku);
+        $cekStmt->execute();
+        $cekResult = $cekStmt->get_result();
+
+        if ($cekResult->num_rows > 0) {
+            $data = $cekResult->fetch_assoc();
+
+            if (strtolower($data['status']) === 'dipinjam') {
+                // Tidak boleh hapus jika status dipinjam
+                header("Location: buku_edit.php?error=dipinjam");
+                exit();
+            } else {
+                // Lanjut hapus
+                $stmt = $conn->prepare("DELETE FROM buku WHERE ID_buku = ?");
+                $stmt->bind_param("i", $ID_buku);
+                $stmt->execute();
+
+                header("Location: buku_edit.php?success=deleted");
+                exit();
+            }
+        }
     }
 
     // Ambil data buku untuk ditampilkan
@@ -66,11 +82,17 @@
               while($result = mysqli_fetch_assoc($sql)) {
             ?>
             <div class="box">
-                <a href="buku_edit.php?delete=<?php echo $result['ID_buku']; ?>" onclick="return confirm('Yakin ingin menghapus buku berjudul: <?php echo addslashes($result['judul']); ?>?');">
-                    <button class="btnDelete">
+                <?php if (strtolower($result['status']) !== 'dipinjam'): ?>
+                    <a href="buku_edit.php?delete=<?= $result['ID_buku']; ?>" onclick="return confirm('Yakin ingin menghapus buku berjudul: <?= addslashes($result['judul']); ?>?');">
+                        <button class="btnDelete">
+                            <img src="img/delete.png" alt="">
+                        </button>
+                    </a>
+                <?php else: ?>
+                    <span class="btnDelete" style="opacity: 0.5; cursor: not-allowed;" title="Tidak bisa dihapus saat sedang dipinjam">
                         <img src="img/delete.png" alt="">
-                    </button>
-                </a>
+                    </span>
+                <?php endif; ?>
                 <div class="frame" onclick="window.location.href='detail_edit.php?ID_buku=<?php echo $result['ID_buku'] ?>'">
                     <img src="data/<?php echo $result['gambar']; ?>" alt="">
                 </div>

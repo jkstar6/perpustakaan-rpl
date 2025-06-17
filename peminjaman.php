@@ -31,7 +31,7 @@
         FROM peminjaman
         JOIN user ON peminjaman.ID_user = user.ID_user
         JOIN buku ON peminjaman.ID_buku = buku.ID_buku
-        WHERE peminjaman.status_peminjaman = 'dipinjam'";
+        WHERE peminjaman.status_peminjaman = 'dipinjam' ORDER BY ID_peminjaman ASC";
 
     $sql_pinjam = mysqli_query($conn, $query_pinjam);
     
@@ -109,11 +109,11 @@
                             <td style="text-align: center; position: relative; bottom: 20px;">
                                 <form class="form-button" method="POST" action="terima_peminjaman.php">
                                     <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
-                                    <button type="submit" name="terima">Terima</button>
+                                    <button type="submit" name="terima" onclick="return confirm('Yakin ingin menerima permintaan ini?')">Terima</button>
                                 </form>
                                 <form class="form-button" method="POST" action="terima_peminjaman.php" style="display:inline;">
                                     <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
-                                    <button type="submit" name="tolak" onclick="return confirm('Yakin ingin menolak permintaan ini?')">Tolak</button>
+                                    <button class="btn-tolak" type="submit" name="tolak" onclick="return confirm('Yakin ingin menolak permintaan ini?')">Tolak</button>
                                 </form>
                             </td>
                         </tr>
@@ -149,9 +149,9 @@
                             <td style="text-align: center;"><?= htmlspecialchars($row['judul_buku']); ?></td>
                             <td style="text-align: center;"><?= htmlspecialchars($row['tanggal_pinjam']); ?></td>
                             <td style="text-align: center; position: relative; bottom: 20px;">
-                                <form class="form-button" method="POST" action="terima_peminjaman.php">
+                                <form class="form-button-kembali" method="POST" action="terima_peminjaman.php">
                                     <input type="hidden" name="id_peminjaman" value="<?= $row['ID_peminjaman']; ?>">
-                                    <button type="submit" name="dikembalikan">Dikembalikan</button>
+                                    <button type="submit" name="dikembalikan" onclick="return confirm('Yakin buku sudah dikembalikan?')">Dikembalikan</button>
                                 </form>
                             </td>
                         </tr>

@@ -127,35 +127,43 @@ main h2{
 .search{
     position: relative;
     margin-bottom: 40px;
+    display: flex;
+    /* background-color: aqua; */
+    width: 490px;
 }
 
 .search img{
-    top: 7px;
-    left: 6px;
     width: 28px;
-    position: absolute;
 }
 
 .search input{
+    /* position: absolute; */
+    left: 0;
     outline: none;
     font-size: 16px;
-    border: 0.5px solid #395144;
+    border: 1px solid #395144;
     width: 400px;
     height: 40px;
     border-radius: 4px;
-    padding-left: 40px;
+    padding: 0 10px;
 }
 
 .search button{
-    position: relative;
-    bottom: 2px;
+    border: 1px solid #1E3827;
+    position: absolute;
+    right: 25px;
     background-color: #395144;
     color: #EADBC8;
     border: 0px;
-    width: 100px;
+    width: 40px;
     height: 40px;
     border-radius:4px;
     transition: 0.2s;
+}
+
+.clear-button{
+    top: 0;
+    right: 0 !important;
 }
 
 .search button:hover{
@@ -423,11 +431,6 @@ main h2{
     text-decoration: none;
 }
 
-.deskripsi-detail a:hover{
-    background-color: #1E3827;
-    border: 2px solid #EADBC8;
-}
-
 .deskripsi-detail p{
     display: block;
     position: absolute;
@@ -680,6 +683,16 @@ main h2{
 }
 
 .form-button button{
+    height: 20px;
+    width: 100px;
+    border: 1px solid #395144;
+    border-radius: 5px;
+    color: #1E3827;
+    background-color: #9DBC98;
+    cursor: pointer;
+}
+
+.form-button-kembali button{
     height: 25px;
     width: 100px;
     border: 1px solid #395144;
@@ -687,4 +700,9 @@ main h2{
     color: #1E3827;
     background-color: #9DBC98;
     cursor: pointer;
+}
+
+.btn-tolak{
+    margin-top: 5px;
+    background-color: #e9e9e9 !important;
 }
